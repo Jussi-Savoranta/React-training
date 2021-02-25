@@ -37,6 +37,15 @@ class App extends Component {
     console.log('[App.js] componentDidMount')
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('[App.js] shouldComponentUpdate');
+    return true;
+  }
+
+  componentDidUpdate() {
+    console.log('[App.js] componentDidUpdate');
+  }
+
   deletePersonHandler = (personIndex) => {
     //const persons = this.state.persons.slice(); // slice will create a copy of a list and stores it to the variable
     const persons = [...this.state.persons]; // same thing but using spread (...) operator
