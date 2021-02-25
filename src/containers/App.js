@@ -6,6 +6,12 @@ import Cockpit from '../components/Cockpit/Cockpit'
 
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    console.log('[App.js] constructor');
+    
+  }
+
   state = {
     persons: [
       { id: 'oeri', name: 'Jussi', age: 39 },
@@ -15,6 +21,19 @@ class App extends Component {
     ],
     otherState: 'some other value',
     showPersons: false
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    console.log('[App.js] getDerivedStateFromProps', props);
+    return state;
+  }
+
+  // componentWillMount() {
+  //   console.log('{App.js] componentWillMount');
+  // }
+
+  componentDidMount() {
+    console.log('[App.js] componentDidMount')
   }
 
   deletePersonHandler = (personIndex) => {
@@ -49,7 +68,7 @@ class App extends Component {
   }
 
   render() {
-
+    console.log('[App.js] render');
     let persons = null;
 
 
@@ -66,7 +85,8 @@ class App extends Component {
       // two ways of making the click-functionality!!
 
       <div className={classes.App}>
-        <Cockpit
+        <Cockpit 
+          title={this.props.appTitle}
           showPersons={this.state.showPersons}
           persons={this.state.persons} 
           clicked={this.togglePersonsHandler}/>
