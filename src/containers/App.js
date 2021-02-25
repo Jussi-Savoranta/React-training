@@ -28,6 +28,7 @@ class App extends Component {
     return state;
   }
 
+  // UNSAFE-this method is being removed
   // componentWillMount() {
   //   console.log('{App.js] componentWillMount');
   // }
