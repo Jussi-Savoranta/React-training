@@ -9,12 +9,10 @@ const cockpit = (props) => {
         // for http request and other stuff
 
         // timeout to mimic http request
-        const timer = setTimeout(() => {
+        setTimeout(() => {
             alert('Saved data to cloud!');
         }, 2000);
         return () => {
-            // clearing the timeout at page load
-            clearTimeout(timer);
             console.log('[Cockpit.js] cleanup work in useEffect');
         }
     }, []) 
@@ -37,10 +35,10 @@ const cockpit = (props) => {
         btnClass = classes.Red;
     }
 
-    if (props.persons.length <= 2) {
+    if (props.personsLength <= 2) {
         assignedClasses.push(classes.red); // classes = ['red']
     }
-    if (props.persons.length <= 1) {
+    if (props.personsLength <= 1) {
         assignedClasses.push(classes.bold); // classes = ['red', 'bold']
     }
 
@@ -56,4 +54,4 @@ const cockpit = (props) => {
     );
 };
 
-export default cockpit;
+export default React.memo(cockpit);
