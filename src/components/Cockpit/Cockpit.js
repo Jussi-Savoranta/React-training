@@ -13,6 +13,7 @@ const cockpit = (props) => {
             alert('Saved data to cloud!');
         }, 2000);
         return () => {
+            // clearing the timeout at page load
             clearTimeout(timer);
             console.log('[Cockpit.js] cleanup work in useEffect');
         }
