@@ -1,6 +1,7 @@
-import React, {useEffect, useRef} from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import classes from './Cockpit.css';
+import AuthContext from '../../context/auth-context';
 
 const cockpit = (props) => {
     const toggelBtnRef = useRef(null);
@@ -18,7 +19,7 @@ const cockpit = (props) => {
         return () => {
             console.log('[Cockpit.js] cleanup work in useEffect');
         }
-    }, []) 
+    }, [])
     // useEffect runs every cycle that it gets rendered (ofc), 
     // second argument specifies to run only when that defined thing changes (like props.persons) 
     // if the [] is empty it will update only for the first cycle
@@ -53,6 +54,9 @@ const cockpit = (props) => {
                 className={btnClass}
                 onClick={props.clicked}>Toggle Persons
           </button>
+            <AuthContext.Consumer>
+                {(context) => <button onClick={context.login}>Log in</button>}
+            </AuthContext.Consumer>
         </div>
     );
 };
