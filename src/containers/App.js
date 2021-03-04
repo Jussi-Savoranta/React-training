@@ -11,7 +11,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     console.log('[App.js] constructor');
-    
+
   }
 
   state = {
@@ -23,7 +23,8 @@ class App extends Component {
     ],
     otherState: 'some other value',
     showPersons: false,
-    showCockpit: true
+    showCockpit: true,
+    changeCounter: 0
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -72,7 +73,13 @@ class App extends Component {
     const persons = [...this.state.persons];
     persons[personIndex] = person;
 
-    this.setState({ persons: persons });
+    // correct way to set state IF you are adding something to previous states value
+    this.setState((pervState, props) => {
+      return {
+        persons: persons,
+        changeCounter: this.state.changeCounter + 1
+      };
+    });
   }
 
   togglePersonsHandler = () => {
@@ -98,13 +105,13 @@ class App extends Component {
       // two ways of making the click-functionality!!
 
       <Aux>
-        <button onClick={() => {this.setState({showCockpit: false})}}>Remove cockpit</button>
-        {this.state.showCockpit ? <Cockpit 
+        <button onClick={() => { this.setState({ showCockpit: false }) }}>Remove cockpit</button>
+        {this.state.showCockpit ? <Cockpit
           title={this.props.appTitle}
           showPersons={this.state.showPersons}
-          personsLength={this.state.persons.length} 
+          personsLength={this.state.persons.length}
           clicked={this.togglePersonsHandler}
-          /> : null}
+        /> : null}
         {persons}
       </Aux>
 
